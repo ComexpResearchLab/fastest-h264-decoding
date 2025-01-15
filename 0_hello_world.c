@@ -107,7 +107,7 @@ int main(int argc, const char *argv[])
     // finds the registered decoder for a codec ID
     // https://ffmpeg.org/doxygen/trunk/group__lavc__decoding.html#ga19a0ca553277f019dd5b0fec6e1f9dca
     pLocalCodec = avcodec_find_decoder(pLocalCodecParameters->codec_id);
-
+    printf("cid: %s\n", pLocalCodec->long_name);
     if (pLocalCodec == NULL)
     {
       logging("ERROR unsupported codec!");
@@ -164,6 +164,9 @@ int main(int argc, const char *argv[])
   AVDictionary * codec_options = NULL;
   av_dict_set(&codec_options, "preset", "ultrafast", 0);
 
+
+
+
   // Initialize the AVCodecContext to use the given AVCodec.
   // https://ffmpeg.org/doxygen/trunk/group__lavc__core.html#ga11f785a188d7d9df71621001465b0f1d
   if (avcodec_open2(pCodecContext, pCodec, &codec_options) < 0)
@@ -171,6 +174,7 @@ int main(int argc, const char *argv[])
     logging("failed to open codec through avcodec_open2");
     return -1;
   }
+
 
   // https://ffmpeg.org/doxygen/trunk/structAVFrame.html
   AVFrame *pFrame = av_frame_alloc();

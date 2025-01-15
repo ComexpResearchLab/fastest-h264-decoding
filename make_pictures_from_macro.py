@@ -5,7 +5,7 @@ import imageio
 
 
 with open('out.txt') as f:
-    data = f.readline()
+    data = f.read()
 
 index = 0
 s=0
@@ -24,9 +24,10 @@ while True:
     # print(data[s:e], index, s, e, )
     if index%1000==0:print(round(index/len(data), 2))
 
-    index=e+1
+    index=e+2
     sub = data[s:e]
     if sub=='':
+        print('broke')
         break
     # print(sub.replace('(','').replace(')','').split('-'))
     x,y,fn,dc = list(map(int, sub.replace('(','').replace(')','').split(';')))
