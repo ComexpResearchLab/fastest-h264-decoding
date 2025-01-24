@@ -43,8 +43,11 @@ T_T_S = /home/ressiwage/projects/frames-decoding/b264t_half.mp4
 run_hello: make_hello 
 	clear_temp;./build/hello $(T_T_S)
 
+time_hello: make_hello
+	clear_temp; time ./build/hello $(T_T_S)
+
 run_test: make_hello
-	cmdbench --iterations 2 --print-averages --print-values --save-json bench.json --save-plot=plot.png "./build/hello $(T_T_S)" && cd temp && python3 ../pgms_to_pngs.py && cd ..
+	cmdbench --iterations 5 --print-averages  --save-json bench.json --save-plot=plot.png "./build/hello $(T_T_S)" && cd temp && python3 ../pgms_to_pngs.py && cd ..
 
 run_test_short: make_hello
 	cmdbench --iterations 2 --print-averages --print-values --save-json bench.json --save-plot=plot.png "./build/hello  $(T_T_S)" && \
@@ -92,3 +95,12 @@ run_me_f: build_me_f
 pipeline_f: run_me_f 
 	mv output_dc.mp4 output_dc_prev.mp4; ffmpeg -y -framerate 30 -i temp/dc_frame_%d.pgm -vf "pad=width=ceil(iw/2)*2:height=ceil(ih/2)*2" -c:v libx264 -pix_fmt yuv420p output_dc.mp4
 	make clear_temp
+
+# requires proper ffmpeg build with minimum modifications plus wsl gui apps enabled
+M1 = output_hi16x16only.mp4
+M2 = output_hi.mp4
+compare:
+	ffplay -f lavfi \
+	"movie=$(M1)[org]; \
+ 	movie=$(M2)[enc]; \
+ 	[org][enc]blend=all_mode=difference"
