@@ -7,3 +7,11 @@ bunny_1s_gop.mp4.webm
 .vscode
 .clangd
 compile_commands.json
+cmake-build-debug/
+uftrace.data/
+uftrace.data.old/
+.idea/
+testing
+*.data
+*.mkv
+*.mp4
