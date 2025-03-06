@@ -20,7 +20,7 @@
 #include <inttypes.h>
 #include <png.h>
 #include <libswscale/swscale.h>
-#define SAVE_PNG 1
+// #define SAVE_PNG 1
 
 // print out the steps and errors
 static void logging(const char *fmt, ...);
@@ -376,7 +376,7 @@ static int decode_packet(AVPacket *pPacket, AVCodecContext *pCodecContext, AVFra
       // save a grayscale frame into a .pgm file
       if (
           print_frames &&
-          pCodecContext->frame_num % 250 == 0)
+          1)
       {
         save_gray_frame(pFrame->data[0], pFrame->linesize[0], pFrame->width, pFrame->height, frame_filename);
 #ifdef SAVE_PNG
