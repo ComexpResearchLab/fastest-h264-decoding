@@ -12,7 +12,7 @@ all: clean fetch_bbb_video make_hello run_hello make_remuxing run_remuxing_ts ru
 clean:
 	@rm -rf ./build/*
 clear_temp:
-	rm temp/frame-* ; rm temp/py*.png ; rm temp/dc_frame*.png ; rm temp/dc_*.pgm
+	rm temp/frame-* ; rm temp/*.png ; rm temp/dc_frame*.png ; rm temp/dc_*.pgm
 
 fetch_small_bunny_video:
 	./fetch_bbb_video.sh
@@ -59,6 +59,8 @@ T_T_S = /home/ressiwage/projects/frames-decoding/b264t_half.mp4
 #AV1
 T_T_S = /home/ressiwage/projects/test-libav/test-decoding/bAV1t_half.mp4
 # T_T_S = /home/ressiwage/projects/test-libav/test-decoding/bAV1t_small.mp4
+T_T_S = /home/ressiwage/projects/test-libav/test-decoding/bAV1t_action.mp4
+
 
 run_hello: make_hello 
 	clear_temp;./build/hello $(T_T_S)
